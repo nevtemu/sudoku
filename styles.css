@@ -1,0 +1,4 @@
+#tablet{
+    display:grid;
+    grid-template: repeat(9,1fr)/repeat(9,1fr)
+}
