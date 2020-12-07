@@ -1,14 +1,14 @@
 const cells = []
 let m, p=0;
-for (let i = 0; i< 9; i++){//rowns
-    for (let k = 0; k< 9; k++){//columns
+for (let i = 0; i< 3; i++){//rowns
+    for (let k = 0; k< 3; k++){//columns
         m = Math.floor(k/3)+(Math.floor(i/3)*3)+1; //нумерация квадратов
         cells.push(`${i}${k}${m}`)
     }  
 }
 let obj={}//convert array to object
 for (const key of cells) {
-    obj[`${key}_`] = key;
+    obj[`${key}_`] = "";
 }
 //create array 1..9 for number generation later
 const etalon = [...Array(10).keys()]
@@ -17,36 +17,44 @@ etalon.shift()
 for (element in obj){
     let availableNumbers = [...etalon]
     let unavailableNumbers = [];
-    let a = element.split('')
-    // b = "("+a[0]+")";
-    let checkRow = new RegExp("^"+a[0]+'[0-9]{2}[_]$',"g");
-    let checkColumn = new RegExp("^[0-9]"+a[0]+'[0-9][_]$',"g");
-    let checkBox = new RegExp("^[0-9]{2}"+a[0]+'[_]$',"g");
-        for (one in obj){
-        if (checkColumn.test(one)){
-            if (Number.isFinite(obj[one])){
-                unavailableNumbers.push(obj[one])
-            }   
-        }
-    }
-    for (one in obj){
-        if (checkRow.test(one)){
-            if (Number.isFinite(obj[one])){
-                unavailableNumbers.push(obj[one])
-            }   
-        }
-    }
-    for (one in obj){
-        if (checkBox.test(one)){
-            if (Number.isFinite(obj[one])){
-                unavailableNumbers.push(obj[one])
-            }   
-        }
-    }
+    // let a = element.split('')
+    // let checkRow = new RegExp("^"+a[0]+'[0-9]{2}[_]$');
+    // let checkColumn = new RegExp("^[0-9]"+a[0]+'[0-9][_]$');
+    // let checkBox = new RegExp("^[0-9]{2}"+a[0]+'[_]$');
+
+    const filteredByValue = Object.fromEntries(Object.entries(obj).filter(([key, value]) => Number.isFinite(value)))
+ for (const [key, value] of Object.entries(filteredByValue)) {
+    unavailableNumbers.push(value)
+  }
+
+    
+
+    //     for (one in obj){
+    //     if (checkColumn.test(one)){
+    //         if (Number.isFinite(obj[one])){
+    //             unavailableNumbers.push(""+one +" : "+obj[one])
+    //         }   
+    //     }
+    // }
+    // for (one in obj){
+    //     if (checkRow.test(one)){
+    //         if (Number.isFinite(obj[one])){
+    //             unavailableNumbers.push(""+one +" : "+obj[one])
+    //         }   
+    //     }
+    // }
+    // for (one in obj){
+    //     if (checkBox.test(one)){
+    //         if (Number.isFinite(obj[one])){
+    //             unavailableNumbers.push(obj[one])
+    //         }   
+    //     }
+    // }
 
 
     console.log(unavailableNumbers)
     availableNumbers = availableNumbers.filter(val => !unavailableNumbers.includes(val));
+    console.log(availableNumbers)
     shuffle(availableNumbers)
     obj[element]=availableNumbers[0]
 }
