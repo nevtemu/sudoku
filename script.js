@@ -8,58 +8,59 @@ for (let i = 0; i< 9; i++){//rowns
 }
 let obj={}//convert array to object
 for (const key of cells) {
-    obj[`${key}_`] = "";
+    obj[`${key}_`] = 0;
 }
-//create array 1..9 for number generation later
-const etalon = [...Array(10).keys()]
-etalon.shift()
+
 //fill object with numbers
-for (element in obj){
-    let availableNumbers = [...etalon]
-    let unavailableNumbers = [];
-    let a = element.split('')
+obj['001_'] = Math.floor(Math.random() * (9 - 1)) + 1;
+
+for (let z=1; z<81; z++){
+        let again = true;
+    do{
+        obj[`${cells[z]}_`]++ //increment value of the current cell
+        if (obj[`${cells[z]}_`] === 10){ // if all values checked - no possible answer
+                obj[`${cells[z]}_`] = 0   //reset current cell
+                z-=2; //move to previous cell
+                again = false;
+                } 
+        console.log(checkVariant(cells[z]))
+        if (checkVariant(cells[z])){again = false}} // if OK - move next cell
+    while(again)
+}
+
+function checkVariant (param){
+    let a = param.split('')
     let checkRow = new RegExp("^"+a[0]+'[0-9]{2}[_]$');
     let checkColumn = new RegExp("^[0-9]"+a[1]+'[0-9][_]$');
     let checkBox = new RegExp("^[0-9]{2}"+a[2]+'[_]$');
 
-    const filteredByValue = Object.fromEntries(Object.entries(obj).filter(([key, value]) => checkBox.test(key)))
+    let unavailableNumbers =[]
+    const filteredByValue = Object.fromEntries(Object.entries(obj).filter(([key, value]) => checkBox.test(key) && key!==`${param}_`))
  for (const [key, value] of Object.entries(filteredByValue)) {
      if (Number.isFinite(value)){
              unavailableNumbers.push(value)
      }
   }
-  const filteredByValue1 = Object.fromEntries(Object.entries(obj).filter(([key, value]) => checkRow.test(key)))
+  const filteredByValue1 = Object.fromEntries(Object.entries(obj).filter(([key, value]) => checkRow.test(key) && key!==`${param}_`))
 for (const [key, value] of Object.entries(filteredByValue1)) {
    if (Number.isFinite(value)){
            unavailableNumbers.push(value)
    }
 }
-const filteredByValue2 = Object.fromEntries(Object.entries(obj).filter(([key, value]) => checkColumn.test(key)))
+const filteredByValue2 = Object.fromEntries(Object.entries(obj).filter(([key, value]) => checkColumn.test(key) && key!==`${param}_`))
 for (const [key, value] of Object.entries(filteredByValue2)) {
    if (Number.isFinite(value)){
            unavailableNumbers.push(value)
    }
 }
-    // console.log(unavailableNumbers)
-    availableNumbers = availableNumbers.filter(val => !unavailableNumbers.includes(val));
-    // console.log(availableNumbers)
-    shuffle(availableNumbers)
-    obj[element]=availableNumbers[0]
+if (unavailableNumbers.includes(obj[`${param}_`])){return false} 
+else {return true}
 }
+
+
 //HTML generation of sudoku field
 const place = document.getElementById('tablet')
 for (element in obj){
     place.innerHTML+=`<div id="${element}">${obj[element]}</div>`
 }
 
-
-
-
-
-function shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-}
