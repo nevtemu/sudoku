@@ -2,3 +2,26 @@
     display:grid;
     grid-template: repeat(9,1fr)/repeat(9,1fr)
 }
+.cell{
+    padding-top: 100%;
+    border: 2px solid  sienna;
+    background: sandybrown;
+    font-size: 20px;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    position: relative
+}
+.cell p {
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    padding: 0;
+    margin: 0;
+}
+div[id^="0"], div[id^="3"], div[id^="6"]{
+    border-top: 14px solid  sienna;
+}
+div[id^="8"]{
+    border-bottom: 14px solid  sienna;
+}

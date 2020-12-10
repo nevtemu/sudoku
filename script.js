@@ -23,7 +23,6 @@ for (let z=1; z<81; z++){
                 z-=2; //move to previous cell
                 again = false;
                 } 
-        console.log(checkVariant(cells[z]))
         if (checkVariant(cells[z])){again = false}} // if OK - move next cell
     while(again)
 }
@@ -61,6 +60,6 @@ else {return true}
 //HTML generation of sudoku field
 const place = document.getElementById('tablet')
 for (element in obj){
-    place.innerHTML+=`<div id="${element}">${obj[element]}</div>`
+    place.innerHTML+=`<div class="cell" id="${element}"><p>${obj[element]}</p></div>`
 }
 
