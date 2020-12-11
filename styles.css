@@ -25,3 +25,9 @@ div[id^="0"], div[id^="3"], div[id^="6"]{
 div[id^="8"]{
     border-bottom: 14px solid  sienna;
 }
+div[id$="0_"], div[id$="3_"], div[id$="6_"]{
+    border-left: 14px solid  sienna;
+}
+div[id$="8_"]{
+    border-right: 14px solid  sienna;
+}

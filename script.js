@@ -3,7 +3,7 @@ let m, p=0;
 for (let i = 0; i< 9; i++){//rowns
     for (let k = 0; k< 9; k++){//columns
         m = Math.floor(k/3)+(Math.floor(i/3)*3)+1; //нумерация квадратов
-        cells.push(`${i}${k}${m}`)
+        cells.push(`${i}${m}${k}`)
     }  
 }
 let obj={}//convert array to object
@@ -12,7 +12,7 @@ for (const key of cells) {
 }
 
 //fill object with numbers
-obj['001_'] = Math.floor(Math.random() * (9 - 1)) + 1;
+obj['010_'] = Math.floor(Math.random() * (9 - 1)) + 1;
 
 for (let z=1; z<81; z++){
         let again = true;
@@ -30,8 +30,8 @@ for (let z=1; z<81; z++){
 function checkVariant (param){
     let a = param.split('')
     let checkRow = new RegExp("^"+a[0]+'[0-9]{2}[_]$');
-    let checkColumn = new RegExp("^[0-9]"+a[1]+'[0-9][_]$');
-    let checkBox = new RegExp("^[0-9]{2}"+a[2]+'[_]$');
+    let checkBox = new RegExp("^[0-9]"+a[1]+'[0-9][_]$');
+    let checkColumn = new RegExp("^[0-9]{2}"+a[2]+'[_]$');
 
     let unavailableNumbers =[]
     const filteredByValue = Object.fromEntries(Object.entries(obj).filter(([key, value]) => checkBox.test(key) && key!==`${param}_`))
@@ -62,4 +62,19 @@ const place = document.getElementById('tablet')
 for (element in obj){
     place.innerHTML+=`<div class="cell" id="${element}"><p>${obj[element]}</p></div>`
 }
+
+const removeCells = (difficulty) => {
+let arr = Object.keys(obj);
+for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+let sliced = arr.slice(0, difficulty)
+console.log(sliced)
+sliced.forEach((item)=> document.getElementById(item).innerHTML=""
+
+)
+}
+removeCells(28)
+
 
