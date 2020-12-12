@@ -1,33 +1,37 @@
+*{
+    margin:0;
+    padding:0
+}
 #tablet{
     display:grid;
-    grid-template: repeat(9,1fr)/repeat(9,1fr)
+    grid-template: repeat(9,1fr)/repeat(9,1fr);
+    height: 25rem;
+    width: 25rem;
+    margin: 3rem;
 }
 .cell{
     padding-top: 100%;
-    border: 2px solid  sienna;
+    border: 0.1rem solid  sienna;
     background: sandybrown;
-    font-size: 20px;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
-    position: relative
+    font: 1rem bold;
+    font-weight: 400;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    position: relative;
 }
 .cell p {
     position: absolute;
-    top: 45%;
-    left: 45%;
-    padding: 0;
-    margin: 0;
+    top: 33%;
+    left: 33%;
 }
 div[id^="0"], div[id^="3"], div[id^="6"]{
-    border-top: 14px solid  sienna;
+    border-top: 0.2rem solid  sienna;
 }
 div[id^="8"]{
-    border-bottom: 14px solid  sienna;
+    border-bottom: 0.2rem solid  sienna;
 }
 div[id$="0_"], div[id$="3_"], div[id$="6_"]{
-    border-left: 14px solid  sienna;
+    border-left: 0.2rem solid  sienna;
 }
 div[id$="8_"]{
-    border-right: 14px solid  sienna;
+    border-right: 0.2rem solid  sienna;
 }
