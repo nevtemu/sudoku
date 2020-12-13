@@ -17,11 +17,15 @@ let coordinates={}
 for (const key of cells) {
     coordinates[`${key}_`] = 0;
 }
-// shuffleArray(cells);
-// first cell (010) number will generate randomly to get unique set each time
-coordinates[`${cells[0]}_`] = getRandom(1,9);
+// first row numbers will generate randomly to get unique set each time
+const numberSet = [...Array(10).keys()]
+numberSet.shift()
+shuffleArray(numberSet)
+for (let v = 0; v<9; v++){
+        coordinates[`${cells[v]}_`] = numberSet[v];
+}
 // fill the rest of numbers. Using backtracking if no solution
-for (let z=1; z<81; z++){
+for (let z=9; z<81; z++){
         let again = true;
         do{
                 coordinates[`${cells[z]}_`]++ //increment value of the current cell
