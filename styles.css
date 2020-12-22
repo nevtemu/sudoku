@@ -12,16 +12,18 @@
 .cell{
     padding-top: 100%;
     border: 0.1rem solid  sienna;
-    background: sandybrown;
-    font: 1rem bold;
-    font-weight: 400;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background: papayawhip;
+    font: 2rem bold;
+    font-weight: 900;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     position: relative;
+    color: firebrick;
+    text-shadow: 0 0 10px saddlebrown;
 }
 .cell p {
     position: absolute;
-    top: 33%;
-    left: 33%;
+    top: 10%;
+    left: 23%;
 }
 div[id^="0"], div[id^="3"], div[id^="6"]{
     border-top: 0.2rem solid  sienna;

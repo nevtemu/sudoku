@@ -37,7 +37,6 @@ for (let z=9; z<81; z++){
                 if (checkVariant(cells[z])){again = false}} // if OK - move next cell
         while(again)
 }
-
 function checkVariant (param){ //This function checks current cell value agains values of other cells in this row, column and box
     let a = param.split('')
     let checkRow = new RegExp("^"+a[0]+'[0-9]{2}[_]$');
@@ -62,21 +61,20 @@ function checkVariant (param){ //This function checks current cell value agains 
 
 //HTML generation of sudoku field
 const place = document.getElementById('tablet')
-for (element in coordinates){
+for (let element in coordinates){
     place.innerHTML+=`<div class="cell" id="${element}"><p>${coordinates[element]}</p></div>`
 }
 //Remove some of the cells values to according to set game difficulty
 const removeCells = (difficulty) => {
-let arrShuffle = Object.keys(coordinates);
-shuffleArray(arrShuffle);
-let slicedArray = arrShuffle.slice(0, difficulty);
-slicedArray.forEach((item)=> document.getElementById(item).innerHTML="");
+        let arrShuffle = Object.keys(coordinates);
+        shuffleArray(arrShuffle);
+        let slicedArray = arrShuffle.slice(0, difficulty);
+        slicedArray.forEach((item)=> document.getElementById(item).innerHTML="");
 }
-
 function shuffleArray (array) {
-        for (let i = array.length - 1; i > 0; i--) {
-                let j = getRandom(0, array.length);
-                [array[i], array[j]] = [array[j], array[i]];
+        for (let x = array.length - 1; x > 0; x--) {
+                let y = getRandom(0, array.length);
+                [array[x], array[y]] = [array[y], array[x]];
         }
         return array;
 }
